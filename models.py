@@ -1,13 +1,24 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 """
 We are using joined table inheritance here because Antelopes and Lions have additional attributes.
 Even though hippos and hyenas don't add new attributes, they might in the future.
 
 Joined table inheritance docs: http://docs.sqlalchemy.org/en/latest/orm/inheritance.html#joined-table-inheritance
+
+Friends == Acquaintances. The word Acquaintances is hard to type and say so I use the word Friends throughout the code.
 """
-from sqlalchemy import Column, Integer, String, ForeignKey
+from sqlalchemy import Column, Integer, String, ForeignKey, Table
 from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import relationship
 
 Base = declarative_base()
+
+association_table = Table(
+    'friend', Base.metadata,
+    Column('left_id', Integer, ForeignKey('animal.id')),
+    Column('right_id', Integer, ForeignKey('animal.id'))
+)
 
 
 # noinspection PyClassHasNoInit
@@ -17,6 +28,7 @@ class Animal(Base):
     type = Column(String, nullable=False)
     name = Column(String, nullable=False)
     age = Column(Integer, nullable=False)
+    friends = relationship('Animal', secondary=association_table, back_populates='friends')
 
     __mapper_args__ = {
         'polymorphic_identity': 'animal',
