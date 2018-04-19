@@ -15,6 +15,8 @@ class Animal(Base):
     __tablename__ = 'animal'
     id = Column(Integer, primary_key=True)
     type = Column(String, nullable=False)
+    name = Column(String, nullable=False)
+    age = Column(Integer, nullable=False)
 
     __mapper_args__ = {
         'polymorphic_identity': 'animal',
@@ -25,7 +27,7 @@ class Animal(Base):
 # noinspection PyClassHasNoInit
 class Lion(Animal):
     __tablename__ = 'lion'
-    hunger = Column(Integer)
+    hunger = Column(Integer, nullable=False)
 
     __mapper_args__ = {
         'polymorphic_identity': 'lion',
@@ -44,7 +46,7 @@ class Hippopotamus(Animal):
 # noinspection PyClassHasNoInit
 class Antelope(Animal):
     __tablename__ = 'antelope'
-    speed = Column(Integer)
+    speed = Column(Integer, nullable=False)
 
     __mapper_args__ = {
         'polymorphic_identity': 'antelope',
