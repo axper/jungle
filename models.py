@@ -8,7 +8,7 @@ Joined table inheritance docs: http://docs.sqlalchemy.org/en/latest/orm/inherita
 
 Friends == Acquaintances. The word Acquaintances is hard to type and say so I use the word Friends throughout the code.
 """
-from sqlalchemy import Column, Integer, String, ForeignKey, Table
+from sqlalchemy import Column, Integer, String, ForeignKey, Table, CheckConstraint, UniqueConstraint
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
 from sqlalchemy_repr import RepresentableBase
@@ -18,7 +18,9 @@ Base = declarative_base(cls=RepresentableBase)
 friend_table = Table(
     'friend', Base.metadata,
     Column('left_id', Integer, ForeignKey('animal.id')),
-    Column('right_id', Integer, ForeignKey('animal.id'))
+    Column('right_id', Integer, ForeignKey('animal.id')),
+    CheckConstraint('left_id != right_id', name='cannot_befriend_self_constraint'),
+    UniqueConstraint('left_id', 'right_id', name='can_be_friends_only_once_constraint')
 )
 
 
@@ -34,6 +36,10 @@ class Animal(Base):
                            primaryjoin=friend_table.c.left_id == id,
                            secondaryjoin=friend_table.c.right_id == id)
 
+    __table_args__ = (
+        # TODO: Add constraint here for max friend count, see: https://stackoverflow.com/q/49935712/2529583
+        # CheckConstraint(func.count(friends) < 10, name='max_friends_constraint'),
+    )
     __mapper_args__ = {
         'polymorphic_identity': 'animal',
         'polymorphic_on': type

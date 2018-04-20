@@ -1,3 +1,4 @@
 SQLAlchemy==1.2.*
 sqlalchemy-repr==0.0.1
 names==0.3.*
+Dijkstar==2.2.*

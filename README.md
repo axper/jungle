@@ -1,29 +1,14 @@
-Types of animals:
-* lion
-* hippopotamus
-* antelope
-* hyena
+Solution for databasae design and shortest path traversal interview question
+====
 
-Instance count of each type of animal: 10
+Requirements
+----
 
-Fields of animal:
-* name
-* age
-* (friends, which are other animal instances). Max allowed friend count: 10
+1. Python2.7
+2. (Optional) Create a virtualenv
+3. Run `pip install -r requirements.txt`
 
-Lion(Animal)
-* hunger
+Running the program
+----
 
-Antelope(Animal)
-* speed
-
-The hungriest lion wants to reach the slowest antelope through his/her acquaintances with minimum contact with
-antelopes and hyenas.
-
-If the lion reaches an antelope, the antelope will alert other animals.
-If the lion reaches a hyena, the hyena will also want a piece of the prey.
-
-
-Task:
-Create a data scheme and a database
-Generate random connections between the animals
+Just execute `solution.py`

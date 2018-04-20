@@ -1,11 +1,18 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+import logging
+
 DATABASE_URL = 'sqlite:///:memory:'
 
 LION_COUNT = 10
 HIPPOPOTAMUS_COUNT = 10
 ANTELOPE_COUNT = 10
 HYENA_COUNT = 10
+
+LION_COST = 1
+HIPPOPOTAMUS_COST = 1
+ANTELOPE_COST = 2
+HYENA_COST = 2
 
 AGE_MIN = 0
 AGE_MAX = 50
@@ -15,3 +22,9 @@ HUNGER_MAX = 100
 
 SPEED_MIN = 0
 SPEED_MAX = 88
+
+EACH_ANIMAL_MAX_FRIENDS = 10
+
+MAX_FRIENDSHIP_COUNT = 80
+
+LOGGING_LEVEL = logging.INFO
