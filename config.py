@@ -1,3 +1,17 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 DATABASE_URL = 'sqlite:///:memory:'
+
+LION_COUNT = 10
+HIPPOPOTAMUS_COUNT = 10
+ANTELOPE_COUNT = 10
+HYENA_COUNT = 10
+
+AGE_MIN = 0
+AGE_MAX = 50
+
+HUNGER_MIN = 0
+HUNGER_MAX = 100
+
+SPEED_MIN = 0
+SPEED_MAX = 88

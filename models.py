@@ -11,10 +11,11 @@ Friends == Acquaintances. The word Acquaintances is hard to type and say so I us
 from sqlalchemy import Column, Integer, String, ForeignKey, Table
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
+from sqlalchemy_repr import RepresentableBase
 
-Base = declarative_base()
+Base = declarative_base(cls=RepresentableBase)
 
-association_table = Table(
+friend_table = Table(
     'friend', Base.metadata,
     Column('left_id', Integer, ForeignKey('animal.id')),
     Column('right_id', Integer, ForeignKey('animal.id'))
@@ -28,7 +29,10 @@ class Animal(Base):
     type = Column(String, nullable=False)
     name = Column(String, nullable=False)
     age = Column(Integer, nullable=False)
-    friends = relationship('Animal', secondary=association_table, back_populates='friends')
+    friends = relationship('Animal',
+                           secondary=friend_table,
+                           primaryjoin=friend_table.c.left_id == id,
+                           secondaryjoin=friend_table.c.right_id == id)
 
     __mapper_args__ = {
         'polymorphic_identity': 'animal',
