@@ -150,10 +150,10 @@ def get_cost(u, v, e, prev_e):
 
 
 def main():
-    session = Session()
-    logging.info('Created session: {}'.format(session))
     models.Base.metadata.create_all(engine)
     logging.info('Created database schema.')
+
+    session = Session()
 
     add_random_animals_of_type_to_session(session, create_lion, config.LION_COUNT)
     add_random_animals_of_type_to_session(session, create_hippopotamus, config.HIPPOPOTAMUS_COUNT)
