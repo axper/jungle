@@ -1,5 +1,7 @@
-Solution for databasae design and shortest path traversal interview question
+Solution for database design and shortest path traversal problem
 ====
+
+Created for Puppetworks/Limes Superior interview.
 
 Requirements
 ----
